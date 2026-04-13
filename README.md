@@ -36,12 +36,40 @@ A simple FastAPI application demonstrating GET and POST endpoints for product ma
 ## Project Structure
 
 ```
-invoTrack/
+fastapi-demo/
 ├── main.py          # FastAPI application with endpoints
 ├── models.py        # Pydantic models
+├── frontend/
+│   ├── src/
+│   │   ├── App.js          # React app with product management
+│   │   ├── components/ui/  # Shadcn UI components
+│   │   └── lib/utils.js    # Utility functions
+│   ├── public/
+│   ├── package.json        # Frontend dependencies
+│   └── tailwind.config.js  # Tailwind configuration
 ├── .gitignore       # Git ignore file
 └── README.md        # This file
 ```
+
+## Frontend Setup
+
+1. **Navigate to frontend directory:**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the React development server:**
+   ```bash
+   npm start
+   ```
+
+4. **Access the frontend:**
+   - Frontend: http://localhost:3000
 
 ## API Usage Examples
 
