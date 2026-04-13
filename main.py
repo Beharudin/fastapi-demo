@@ -22,10 +22,10 @@ def greet():
 
 
 products= [
-    models.Product(id=1, name='Laptop', price=999.99, description='A high-performance laptop', quantity=10),
-    models.Product(id=2, name='Smartphone', price=499.99, description='A latest model smartphone', quantity=20),
-    models.Product(id=3, name='Headphones', price=199.99, description='Noise-cancelling headphones', quantity=15),
-    models.Product(id=4, name='Tablet', price=299.99, description='A lightweight tablet', quantity=25)
+    models.Product(name='Laptop', price=999.99, description='A high-performance laptop', quantity=10),
+    models.Product(name='Smartphone', price=499.99, description='A latest model smartphone', quantity=20),
+    models.Product(name='Headphones', price=199.99, description='Noise-cancelling headphones', quantity=15),
+    models.Product(name='Tablet', price=299.99, description='A lightweight tablet', quantity=25)
 ]
 
 # Initialize the database with the products
