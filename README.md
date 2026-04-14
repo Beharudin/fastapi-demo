@@ -129,12 +129,12 @@ curl -X DELETE http://localhost:8000/products/{id}
 
 
 ### Tech Stack
-`FastAPI`
-`SQLAlchemy`
-`Pydantic`
-`Uvicorn`
-`React (frontend)`
-`TailwindCSS`
+- `FastAPI`
+- `SQLAlchemy`
+- `Pydantic`
+- `Uvicorn`
+- `React (frontend)`
+- `TailwindCSS`
 
 ## Built With
 
