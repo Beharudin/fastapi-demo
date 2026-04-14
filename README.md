@@ -9,6 +9,8 @@ A simple FastAPI application demonstrating GET and POST endpoints for product ma
 - **GET /products/**: Get all products
 - **GET /products/{product_id}**: Get a specific product by ID
 - **POST /products/**: Create a new product
+- **PUT /products/{id}**: Update a product
+- **DELETE /products/{id}**: Delete a product
 
 ## Setup
 
@@ -20,7 +22,7 @@ A simple FastAPI application demonstrating GET and POST endpoints for product ma
 
 2. **Install dependencies:**
    ```bash
-   pip install fastapi uvicorn
+   pip install fastapi uvicorn sqlalchemy python-dotenv
    ```
 
 3. **Run the application:**
@@ -38,7 +40,9 @@ A simple FastAPI application demonstrating GET and POST endpoints for product ma
 ```
 fastapi-demo/
 ├── main.py          # FastAPI application with endpoints
-├── models.py        # Pydantic models
+├── models.py        # SQLAlchemy models
+├── schema.py        # Pydantic schemas
+├── database.py      # DB connection & session
 ├── frontend/
 │   ├── src/
 │   │   ├── App.js          # React app with product management
@@ -96,14 +100,41 @@ curl -X POST "http://localhost:8000/products/" \
      }'
 ```
 
+### Update product
+```bash
+curl -X PUT "http://localhost:8000/products/{id}" \
+-H "Content-Type: application/json" \
+-d '{
+  "name": "Updated Monitor",
+  "description": "Updated",
+  "price": 399.99,
+  "quantity": 10
+}'
+```
+
+### Delete product
+```bash
+curl -X DELETE http://localhost:8000/products/{id}
+```
+
+
 ## Models
 
 ### Product
-- `id`: integer
+- `id`: UUID
 - `name`: string
 - `description`: string
 - `price`: float
 - `quantity`: integer
+
+
+### Tech Stack
+`FastAPI`
+`SQLAlchemy`
+`Pydantic`
+`Uvicorn`
+`React (frontend)`
+`TailwindCSS`
 
 ## Built With
 
