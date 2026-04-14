@@ -3,7 +3,8 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, get_db
 import models
-from schema import CreateProduct, ProductResponse
+from uuid import UUID
+from schema import CreateProduct, SingleProductResponse, ProductListResponse
 
 app = FastAPI()
 
@@ -45,20 +46,20 @@ init_db()
 def format_response(message: str, data=None, status_text: str = "success"):
     return {"message": message, "status": status_text, "data": data}
 
-@app.get('/products', response_model=list[ProductResponse])
+@app.get('/products', response_model=ProductListResponse)
 def get_all_products(db: Session=Depends(get_db)):
     products = db.query(models.Product).all()
     message = "No products available" if not products else "Products retrieved successfully"
     return format_response(message=message, data=products)
 
-@app.get("/product/{id}", response_model=ProductResponse)
-def get_product_by_id(id: int, db: Session=Depends(get_db)):
+@app.get("/product/{id}", response_model=SingleProductResponse)
+def get_product_by_id(id: UUID, db: Session=Depends(get_db)):
     product = db.query(models.Product).filter(models.Product.id == id).first()
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return format_response(message="Product retrieved successfully", data=product)
 
-@app.post('/product', response_model=ProductResponse, status_code=status.HTTP_201_CREATED)
+@app.post('/product', response_model=SingleProductResponse, status_code=status.HTTP_201_CREATED)
 def create_product(product: CreateProduct, db: Session=Depends(get_db)):
     new_product = models.Product(**product.model_dump())
     db.add(new_product)
@@ -69,8 +70,8 @@ def create_product(product: CreateProduct, db: Session=Depends(get_db)):
         data=new_product,
     )
 
-@app.put('/product/{id}', response_model=ProductResponse)
-def update_product(id: int, updated_product: CreateProduct, db: Session=Depends(get_db)):
+@app.put('/product/{id}', response_model=SingleProductResponse)
+def update_product(id: UUID, updated_product: CreateProduct, db: Session=Depends(get_db)):
     product = db.query(models.Product).filter(models.Product.id == id).first()
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
@@ -83,8 +84,8 @@ def update_product(id: int, updated_product: CreateProduct, db: Session=Depends(
     )
 
 
-@app.delete('/product/{id}', response_model=ProductResponse, status_code=status.HTTP_200_OK)
-def delete_product(id: int, db: Session=Depends(get_db)):
+@app.delete('/product/{id}', response_model=SingleProductResponse, status_code=status.HTTP_200_OK)
+def delete_product(id: UUID, db: Session=Depends(get_db)):
     product = db.query(models.Product).filter(models.Product.id == id).first()
     if not product:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
