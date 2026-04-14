@@ -6,7 +6,6 @@ export const useProductModalStore = create((set) => ({
   isDeleteWarningOpen: false,
   selectedProduct: null,
   newProduct: {
-    id: '',
     name: '',
     description: '',
     price: '',
@@ -24,7 +23,6 @@ export const useProductModalStore = create((set) => ({
   })),
   resetNewProduct: () => set({
     newProduct: {
-      id: '',
       name: '',
       description: '',
       price: '',
